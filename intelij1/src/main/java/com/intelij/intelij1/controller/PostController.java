@@ -24,7 +24,7 @@ public class PostController {
 
     }
 
-    //http://localhost:8080/api/posts/particular?id=1
+    //http://localhost:8081/api/posts/particular?id=1
     @GetMapping("/particular")
     public ResponseEntity<PostDto> getPostById(@RequestParam long id){
 
@@ -33,16 +33,20 @@ public class PostController {
     }
 
 
-    //http://localhost:8080/api/posts?pageNo=0&pageSize=3
+    //http://localhost:8081/api/posts?pageNo=0&pageSize=3&sortBy=title&sortDir=desc
     @GetMapping
     public List<PostDto> getAllPosts(
             @RequestParam(name ="pageNo",required= false, defaultValue = "0") int pageNo,
-            @RequestParam(name ="pageSize",required= false, defaultValue = "3") int pageSize
+            @RequestParam(name ="pageSize",required= false, defaultValue = "3") int pageSize,
+            @RequestParam(name ="sortBy",required= false, defaultValue = "id") String sortBy,
+            @RequestParam(name ="sortDir",required= false, defaultValue = "id") String sortDir
+
+
 
 
     ){
 
-      List<PostDto> postDtos =  postService.getAllPosts(pageNo,pageSize);
+      List<PostDto> postDtos =  postService.getAllPosts(pageNo,pageSize,sortBy,sortDir);
       return postDtos;
     }
 }

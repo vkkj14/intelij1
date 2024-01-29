@@ -14,7 +14,7 @@ public class TestClass {
     }
 
     public int test(){
-        int otp= SampleTest.test1();
-        return otp;
+        int max= SampleTest.test1();
+        return max;
     }
 }
