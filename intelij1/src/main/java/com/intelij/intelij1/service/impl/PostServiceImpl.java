@@ -5,6 +5,7 @@ import com.intelij.intelij1.exception.ResourceNotFoundException;
 import com.intelij.intelij1.payload.PostDto;
 import com.intelij.intelij1.repository.PostRepository;
 import com.intelij.intelij1.service.PostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -17,8 +18,11 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
-    public PostServiceImpl(PostRepository postRepository) {
-        this.postRepository = postRepository;
+    private ModelMapper modelMapper;
+
+    public PostServiceImpl(PostRepository postRepository , ModelMapper modelMapper){
+        this.postRepository= postRepository;
+        this.modelMapper=modelMapper;
     }
 
     @Override
@@ -73,19 +77,12 @@ public class PostServiceImpl implements PostService {
 
     PostDto mapToDto(Post post){
 
-        PostDto dto = new PostDto();
-        dto.setId(post.getId());
-        dto.setTitle(post.getTitle());
-        dto.setDescription(post.getDescription());
-        dto.setContent(post.getContent());
+        PostDto dto = modelMapper.map(post,PostDto.class);
         return dto;
     }
 
     Post mapToEntity(PostDto postDto){
-        Post post = new Post();
-        post.setTitle(postDto.getTitle());
-        post.setDescription(postDto.getDescription());
-        post.setContent(postDto.getContent());
+        Post post = modelMapper.map(postDto,Post.class);
         return post;
     }
 
