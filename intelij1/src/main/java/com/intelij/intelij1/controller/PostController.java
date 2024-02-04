@@ -4,6 +4,7 @@ import com.intelij.intelij1.payload.PostDto;
 import com.intelij.intelij1.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class PostController {
     public PostController(PostService postService) {
         this.postService = postService;
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<PostDto> create(@RequestBody PostDto postDto){
           PostDto dto=postService.createPost(postDto);

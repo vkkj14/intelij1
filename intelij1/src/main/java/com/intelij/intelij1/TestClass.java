@@ -1,20 +1,15 @@
 package com.intelij.intelij1;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+//
 public class TestClass {
 
 
-    public static void main(String[]args){
+    public static void main(String[] args) {
+        PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
+        System.out.println(passwordEncoder.encode("Testing"));
 
-        TestClass testClass = new TestClass();
-        System.out.println(100);
-
-        System.out.println(200);
-        int val =testClass.test();
-        System.out.println(val);
-    }
-
-    public int test(){
-        int max= SampleTest.test1();
-        return max;
     }
 }
