@@ -29,7 +29,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
             http
                     .csrf().disable()
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.GET,  "/api/**").permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+                    .antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+
                     .anyRequest()
                     .authenticated()
                     .and()
